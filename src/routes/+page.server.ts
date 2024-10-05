@@ -6,7 +6,7 @@ import { use_local_data_source } from '$env/static/private';
 import type { Resource, ResourceDetails } from '$lib/types';
 
 async function getResourceDetails(resource: Resource) {
-	const url = 'https://gaql-query-builder.uc.r.appspot.com/schemas/v17/' + resource.name + '.json';
+	const url = `https://gaql-query-builder.uc.r.appspot.com/schemas/v17/${resource.name}.json`;
 	const response = await fetch(url);
 	if (!response.ok) {
 		throw new Error(`HTTP error! status: ${response.status}`);
@@ -19,7 +19,7 @@ async function getResourceDetails(resource: Resource) {
 function cleanResources(resources: Resource[]) {
 	// Remove all field details except for description
 	resources = resources.map((resource) => {
-		if (resource.details && resource.details.fields) {
+		if (resource.details?.fields) {
 			for (const fieldName in resource.details.fields) {
 				if (resource.details.fields[fieldName].field_details) {
 					const { description } = resource.details.fields[fieldName].field_details;
