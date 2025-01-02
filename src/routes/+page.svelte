@@ -1,7 +1,7 @@
 <script lang="ts">
 	import OptionSelector from '$lib/OptionSelector.svelte';
-	import SelectedItems from '$lib/SelectedItems.svelte';
 	import ResourceList from '$lib/ResourceList.svelte';
+	import SelectedItems from '$lib/SelectedItems.svelte';
 
 	export let data;
 
@@ -36,15 +36,8 @@
 	}
 
 	// Function to filter options based on search and selected items
-	function filterOptions(options: string[], search: string, selected: string[]): string[] {
-		const filtered = options.filter((option) =>
-			option.toLowerCase().includes(search.toLowerCase())
-		);
-		const selectedSet = new Set(selected);
-		return [
-			...filtered.filter((option) => selectedSet.has(option)),
-			...filtered.filter((option) => !selectedSet.has(option))
-		];
+	function filterOptions(options: string[], search: string): string[] {
+		return options.filter((option) => option.toLowerCase().includes(search.toLowerCase()));
 	}
 
 	// Function to get the description of an option
@@ -83,13 +76,9 @@
 	}
 
 	// Prepare options for each category
-	$: attributeOptions = filterOptions(
-		getAllOptions('attributes'),
-		attributeSearch,
-		selectedAttributes
-	);
-	$: segmentOptions = filterOptions(getAllOptions('segments'), segmentSearch, selectedSegments);
-	$: metricOptions = filterOptions(getAllOptions('metrics'), metricSearch, selectedMetrics);
+	$: attributeOptions = filterOptions(getAllOptions('attributes'), attributeSearch);
+	$: segmentOptions = filterOptions(getAllOptions('segments'), segmentSearch);
+	$: metricOptions = filterOptions(getAllOptions('metrics'), metricSearch);
 </script>
 
 <!-- Main Container -->
