@@ -7,6 +7,19 @@
 	export let colorClass: string;
 	export let clearSection: () => void;
 	export let getOptionDescription: (option: string) => string;
+
+	function handleSelection(option: string, checked: boolean) {
+		if (checked) {
+			selectedOptions = [...new Set([...selectedOptions, option])];
+		} else {
+			selectedOptions = selectedOptions.filter((item) => item !== option);
+		}
+	}
+
+	function handleChange(e: Event, option: string) {
+		const target = e.target as HTMLInputElement;
+		handleSelection(option, target.checked);
+	}
 </script>
 
 <div class="mb-8">
@@ -26,8 +39,8 @@
 				title={getOptionDescription(option)}>
 				<input
 					type="checkbox"
-					bind:group={selectedOptions}
-					value={option}
+					checked={selectedOptions.includes(option)}
+					on:change={(e) => handleChange(e, option)}
 					class="mr-2 h-4 w-4 text-blue-600 focus:ring-blue-500 flex-shrink-0" />
 				<span class="text-sm text-gray-700 dark:text-gray-200">{option}</span>
 			</label>
