@@ -28,9 +28,7 @@
 	<div class="bg-white shadow-md p-6 mt-8 dark:bg-gray-800">
 		<p>
 			Open source at
-			<a href="https://github.com/Guandor/gads-resource-finder">Github</a> 💻 - Last update at {new Date(
-				import.meta.env.BUILD_DATE
-			).toLocaleDateString('en-GB')}
+			<a href="https://github.com/Guandor/gads-resource-finder">Github</a> 💻
 		</p>
 	</div>
 </main>
